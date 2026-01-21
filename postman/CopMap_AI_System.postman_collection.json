@@ -1,0 +1,68 @@
+{
+  "info": {
+    "name": "CopMap AI Patrol System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "APIs for AI-driven patrolling and bandobast automation"
+  },
+  "item": [
+    {
+      "name": "Submit Camera Event",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8000/api/events",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "events"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"camera_id\": \"CAM_12\",\n  \"location\": \"Market Road\",\n  \"people_count\": 58,\n  \"objects_detected\": [\"person\", \"vehicle\"],\n  \"timestamp\": \"2026-01-18T10:30:00\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Get Active Alerts",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8000/api/alerts",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "alerts"]
+        }
+      }
+    },
+    {
+      "name": "Generate Patrol Summary",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8000/api/patrol/summary",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "patrol", "summary"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"zone\": \"Zone A\",\n  \"start_time\": \"2026-01-18T06:00:00\",\n  \"end_time\": \"2026-01-18T14:00:00\"\n}"
+        }
+      }
+    }
+  ]
+}
