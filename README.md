@@ -94,69 +94,63 @@ No alert is escalated without **confidence thresholds and temporal validation**.
 ```mermaid
 flowchart TD
 
-    %% ========== Input Layer ==========
-    subgraph Input_Layer["Input Layer"]
-        A[CCTV / Camera Feed]
-    end
+subgraph Input_Layer
+    A[CCTV Camera Feed]
+end
 
-    %% ========== Video Processing ==========
-    subgraph Video_Processing["Video Processing"]
-        B[Frame Extractor (OpenCV)]
-    end
+subgraph Video_Processing
+    B[Frame Extractor - OpenCV]
+end
 
-    %% ========== AI / ML Layer ==========
-    subgraph AI_ML["AI / ML Layer"]
-        C[Object Detection (YOLOv8)]
-        D[Crowd Analysis (Density Estimation)]
-        E[Event Engine (Rule + ML Hybrid)]
-    end
+subgraph AI_ML
+    C[Object Detection - YOLOv8]
+    D[Crowd Analysis - Density Estimation]
+    E[Event Engine - Rule plus ML]
+end
 
-    %% ========== Backend Layer ==========
-    subgraph Backend["Backend Layer"]
-        F[FastAPI Backend]
-        K[Task Queue (Celery)]
-        L[Message Broker (Redis / Kafka)]
-    end
+subgraph Backend
+    F[FastAPI Backend]
+    K[Task Queue - Celery]
+    L[Message Broker - Redis or Kafka]
+end
 
-    %% ========== Data Layer ==========
-    subgraph Data_Layer["Data Layer"]
-        H[(Patrol Logs - PostgreSQL)]
-        I[(Vector DB - FAISS / Pinecone)]
-        M[(Object Storage - S3)]
-    end
+subgraph Data_Layer
+    H[(Patrol Logs - PostgreSQL)]
+    I[(Vector DB - FAISS or Pinecone)]
+    M[(Object Storage - S3)]
+end
 
-    %% ========== LLM Layer ==========
-    subgraph LLM_Layer["LLM Layer"]
-        J[LLM Summary Engine (GPT / Gemini)]
-    end
+subgraph LLM_Layer
+    J[LLM Summary Engine - GPT or Gemini]
+end
 
-    %% ========== UI Layer ==========
-    subgraph UI_Layer["UI Layer"]
-        G[CopMap Dashboard]
-    end
+subgraph UI_Layer
+    G[CopMap Dashboard]
+end
 
-    %% ========== Flow Connections ==========
-    A --> B
-    B --> C
-    B --> D
-    C --> E
-    D --> E
+A --> B
+B --> C
+B --> D
+C --> E
+D --> E
 
-    E --> F
-    F --> G
+E --> F
+F --> G
 
-    F --> H
-    H --> I
-    I --> J
-    J --> G
+F --> H
+H --> I
+I --> J
+J --> G
 
-    B --> M
-    C --> M
-    D --> M
+B --> M
+C --> M
+D --> M
 
-    F --> K
-    K --> L
-    L --> F
+F --> K
+K --> L
+L --> F
+
+
 
 
 ## 3. AI / ML Components
