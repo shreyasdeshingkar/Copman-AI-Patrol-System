@@ -93,17 +93,70 @@ No alert is escalated without **confidence thresholds and temporal validation**.
 
 ```mermaid
 flowchart TD
-    A[CCTV / Camera Feed] --> B[Frame Extractor]
-    B --> C[Object Detection]
-    B --> D[Crowd Analysis]
-    C --> E[Event Engine]
+
+    %% ========== Input Layer ==========
+    subgraph Input_Layer["Input Layer"]
+        A[CCTV / Camera Feed]
+    end
+
+    %% ========== Video Processing ==========
+    subgraph Video_Processing["Video Processing"]
+        B[Frame Extractor (OpenCV)]
+    end
+
+    %% ========== AI / ML Layer ==========
+    subgraph AI_ML["AI / ML Layer"]
+        C[Object Detection (YOLOv8)]
+        D[Crowd Analysis (Density Estimation)]
+        E[Event Engine (Rule + ML Hybrid)]
+    end
+
+    %% ========== Backend Layer ==========
+    subgraph Backend["Backend Layer"]
+        F[FastAPI Backend]
+        K[Task Queue (Celery)]
+        L[Message Broker (Redis / Kafka)]
+    end
+
+    %% ========== Data Layer ==========
+    subgraph Data_Layer["Data Layer"]
+        H[(Patrol Logs - PostgreSQL)]
+        I[(Vector DB - FAISS / Pinecone)]
+        M[(Object Storage - S3)]
+    end
+
+    %% ========== LLM Layer ==========
+    subgraph LLM_Layer["LLM Layer"]
+        J[LLM Summary Engine (GPT / Gemini)]
+    end
+
+    %% ========== UI Layer ==========
+    subgraph UI_Layer["UI Layer"]
+        G[CopMap Dashboard]
+    end
+
+    %% ========== Flow Connections ==========
+    A --> B
+    B --> C
+    B --> D
+    C --> E
     D --> E
-    E --> F[FastAPI Backend]
-    F --> G[CopMap Dashboard]
-    F --> H[Patrol Logs]
-    H --> I[Vector DB]
-    I --> J[LLM Summary Engine]
+
+    E --> F
+    F --> G
+
+    F --> H
+    H --> I
+    I --> J
     J --> G
+
+    B --> M
+    C --> M
+    D --> M
+
+    F --> K
+    K --> L
+    L --> F
 
 
 ## 3. AI / ML Components
