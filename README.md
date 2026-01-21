@@ -93,17 +93,18 @@ No alert is escalated without **confidence thresholds and temporal validation**.
 
 ```mermaid
 flowchart TD
-A[CCTV / Camera Feed] --> B[Frame Extractor]
-B --> C[Object Detection]
-B --> D[Crowd Analysis]
-C --> E[Event Engine]
-D --> E
-E --> F[FastAPI Backend]
-F --> G[CopMap Dashboard]
-F --> H[Patrol Logs]
-H --> I[Vector DB]
-I --> J[LLM Summary Engine]
-J --> G
+    A[CCTV / Camera Feed] --> B[Frame Extractor]
+    B --> C[Object Detection]
+    B --> D[Crowd Analysis]
+    C --> E[Event Engine]
+    D --> E
+    E --> F[FastAPI Backend]
+    F --> G[CopMap Dashboard]
+    F --> H[Patrol Logs]
+    H --> I[Vector DB]
+    I --> J[LLM Summary Engine]
+    J --> G
+
 
 ## 3. AI / ML Components
 
